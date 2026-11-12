@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <list>
 using namespace std;
 
 const int SIZE = 7;
@@ -45,6 +46,29 @@ public:
     }
 };
 
+void DFS(Graph);
+void BFS(Graph, int);
+bool find(list, int);
+
+bool find (list List, int Int) {
+    bool found = false;
+    for (int i = 0; i < List.length(); ++i)
+        if (List[i] == Int)
+            found = true;
+
+    return found;
+}
+
+void BFS(Graph graph, int vertex = 0) {
+    static list<int> searched; 
+    for (Pair v : graph.adjList[vertex]) {
+        if (!)
+            BFS(graph, v.first);
+            list.push_back(v.first);
+    }
+    cout << "BFS starting from vertex 0:\n";
+}
+
 int main() {
     // Creates a vector of graph edges/weights
     vector<Edge> edges = {
@@ -57,6 +81,7 @@ int main() {
 
     // Prints adjacency list representation of graph
     graph.printGraph();
+    BFS(graph);
 
     return 0;
 }
