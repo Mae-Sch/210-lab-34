@@ -60,15 +60,17 @@ bool find(vector<int> List, int Int) {
 }
 
 void BFS(Graph graph, int vertex = 0) {
-    static vector<int> searched; 
+    static vector<int> searched;
+    static bool hasOutput = false; 
+    searched.push_back(vertex);
     for (Pair v : graph.adjList[vertex]) {
         if (!find(searched, v.first)) {
-            searched.push_back(v.first);
             BFS(graph, v.first);
         }
     }
     // check if all nodes have been visited
-    if (searched.size() == SIZE) {
+    if (searched.size() == SIZE && !hasOutput) {
+        hasOutput = true;
         cout << "BFS starting from vertex 0:\n";
         for (int i = 0; i < searched.size(); ++i) {
             cout << searched[i] << " ";
