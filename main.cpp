@@ -48,11 +48,11 @@ public:
 
 void DFS(Graph);
 void BFS(Graph, int);
-bool find(list, int);
+bool find(vector<int>, int);
 
-bool find (list List, int Int) {
+bool find(vector<int> List, int Int) {
     bool found = false;
-    for (int i = 0; i < List.length(); ++i)
+    for (int i = 0; i < List.size(); ++i)
         if (List[i] == Int)
             found = true;
 
@@ -60,13 +60,21 @@ bool find (list List, int Int) {
 }
 
 void BFS(Graph graph, int vertex = 0) {
-    static list<int> searched; 
+    static vector<int> searched; 
     for (Pair v : graph.adjList[vertex]) {
-        if (!)
+        if (!find(searched, v.first)) {
+            searched.push_back(v.first);
             BFS(graph, v.first);
-            list.push_back(v.first);
+        }
     }
-    cout << "BFS starting from vertex 0:\n";
+    // check if all nodes have been visited
+    if (searched.size() == SIZE) {
+        cout << "BFS starting from vertex 0:\n";
+        for (int i = 0; i < searched.size(); ++i) {
+            cout << searched[i] << " ";
+        }
+        cout << endl;
+    }
 }
 
 int main() {
