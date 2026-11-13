@@ -46,7 +46,7 @@ public:
     }
 };
 
-void DFS(Graph);
+void DFS(Graph, int);
 void BFS(Graph, int);
 bool find(vector<int>, int);
 
@@ -79,6 +79,27 @@ void BFS(Graph graph, int vertex = 0) {
     }
 }
 
+void DFS(Graph graph, int vertex = 0) {
+    static vector<int> searched;
+    static bool hasOutput = false; 
+    for (Pair v : graph.adjList[vertex]) {
+        if (!find(searched, v.first)) {
+            searched.push_back(vertex);
+            DFS(graph, v.first);
+        }
+    }
+    // check if all nodes have been visited
+    if (searched.size() == SIZE && !hasOutput) {
+        hasOutput = true;
+        cout << "DFS starting from vertex 0:\n";
+        for (int i = 0; i < searched.size(); ++i) {
+            cout << searched[i] << " ";
+        }
+        cout << endl;
+    }
+}
+
+
 int main() {
     // Creates a vector of graph edges/weights
     vector<Edge> edges = {
@@ -91,6 +112,7 @@ int main() {
 
     // Prints adjacency list representation of graph
     graph.printGraph();
+    DFS(graph);
     BFS(graph);
 
     return 0;
